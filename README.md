@@ -22,5 +22,5 @@ In this protocol, we are going to present a method to capture longitudinal clini
 The EHR Data mart is the basic component of the protocol, it consists both the codified data and narrative data. The raw EHR data includes a great amount of information, and many of them do not need to be involve in our study taken both confidentiality and storage availability under consideration. We need a variable dictionary for our specific study on the target disease. The shiny app ONCE can help us derive the relative codified features(PheCode, CCS, LOINC, RxNorm) and narrative features(relative CUIs and terms) .
 
 | Use                           | Method | Links                                         | References                                                                                                                       |
-|-------------------------------|--------|-----------------------------------------------|----------------------------------------------------------------------------------------------------------------------------------|
+|------------|------------|------------|------------------------------------|
 | Compiling Variable Dictionary | ONCE   | [ONCE](https://shiny.parse-health.org/ONCE/#) | [Knowledge-Driven Online Multimodal Automated Phenotyping System](https://www.medrxiv.org/content/10.1101/2023.09.29.23296239v1) |
