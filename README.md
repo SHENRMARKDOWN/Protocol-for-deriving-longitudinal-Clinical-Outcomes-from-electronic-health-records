@@ -51,7 +51,7 @@ This is a visualization tool for aggregating codified data.
 We will extract the NLP mentions from the free-text clinical notes and map them into the Concept Unique Identifiers (CUIs) in the Unified Medical Language System (UMLS).
 
 | Use                       | Method                                         | Links                                                     | References                                                                                                                                                                                                                                                        |
-|---------------|---------------------------|---------------|---------------|
+|-----------------|---------------------|-----------------|-----------------|
 | Processing narrative data | Narrative Information Linear Extraction (NILE) | [NILE](https://celehs.hms.harvard.edu/software/NILE.html) | [The UMLS project: making the conceptual connection between users and the information they need.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC225759/) , [NILE: Fast Natural Language Processing for Electronic Health Records](https://arxiv.org/abs/1311.6063) |
 
 ##### Summarizing
@@ -63,7 +63,19 @@ The result of the codified data aggregation and narrative data processing will b
 We are going to use high-throughput **M**ultimodal **A**utomated **P**henotyping **(MAP)** algorithm to complete the phenotyping. MAP is a algorithm used to predict the probability of the patient having a certain outcome (eg: target disease) based on the counts of ICD codes, NLP mentions, and visits. The MAP will automatically generate a threshold based on the data. The details of MAP can be found in [High-throughput multimodal automated phenotyping (MAP) with application to PheWAS](https://academic.oup.com/jamia/article-abstract/26/11/1255/5544731)
 
 | Use         | Method                                                | Links                           | References                                                                                                                                              |
-|--------------|-------------------|--------------|-------------------------|
+|-----------------|-----------------|-----------------|---------------------|
 | Phenotyping | MAP(high-throughput Multimodal Automated Phenotyping) | "MAP" package is available in R | [High-throughput multimodal automated phenotyping (MAP) with application to PheWAS](https://academic.oup.com/jamia/article-abstract/26/11/1255/5544731) |
 
 ![**Figure 2:** The example of MAP input.](MAP_input.jpg)
+
+## Step 3: Preparing data for LATTE algorithm
+
+##### Creating Golden-standard label
+
+LATTE needs both golden-label and silver-label in order to train the algorithm. At least 200 golden labels are recommended and they can be derived by existing data source (eg: disease registries, manual chart review) .
+
+![**Figure 3:** Example of Golden-standard label](Golden-standard_label.jpg)
+
+##### Creating Silver-standard label
+
+Silver standard labels can be constructed for each patient-period according to frequency of assessment determined in EHR data processing section.
