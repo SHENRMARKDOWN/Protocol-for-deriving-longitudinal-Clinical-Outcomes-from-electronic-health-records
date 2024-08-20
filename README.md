@@ -66,4 +66,4 @@ We are going to use high-throughput **M**ultimodal **A**utomated **P**henotyping
 |--------------|-------------------|--------------|-------------------------|
 | Phenotyping | MAP(high-throughput Multimodal Automated Phenotyping) | "MAP" package is available in R | [High-throughput multimodal automated phenotyping (MAP) with application to PheWAS](https://academic.oup.com/jamia/article-abstract/26/11/1255/5544731) |
 
-![Figure 2: The example of MAP input](MAP_input.jpg)
+![**Figure 2:** The example of MAP input.](MAP_input.jpg)
