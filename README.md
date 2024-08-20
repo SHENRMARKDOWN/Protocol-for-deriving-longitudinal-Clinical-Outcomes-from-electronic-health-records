@@ -83,10 +83,10 @@ Silver standard labels can be constructed for each patient-period according to f
 | Use                            | Method                 | Links                                                                                                                                                                                                                                                                                                                                                                                  |
 |---------------------------|------------------|---------------------------|
 | Creating silver-standard label | Diagnosis code counts  | [LATTE: Label-efficient incident phenotyping from longitudinal electronic health records](https://www.cell.com/patterns/fulltext/S2666-3899(23)00313-6) , [A semi-supervised adaptive Markov Gaussian embedding process (SAMGEP) for prediction of phenotype event times using the electronic health record](https://www.nature.com/articles/s41598-022-22585-3)                       |
-| Creating silver-standard label |                        | [Performance of a Machine Learning Algorithm Using Electronic Health Record Data to Identify and Estimate Survival in a Longitudinal Cohort of Patients With Lung Cancer](https://jamanetwork.com/journals/jamanetworkopen/article-abstract/2781685)                                                                                                                                   |
-| Creating silver-standard label |                        | [Development of a Natural Language Processing System for Extracting Rheumatoid Arthritis Outcomes From Clinical Notes Using the National Rheumatology Informatics System for Effectiveness Registry](https://acrjournals.onlinelibrary.wiley.com/doi/abs/10.1002/acr.24869?casa_token=qBHRelp_VTcAAAAA%3AMzpKqHU2T8Fuzj6GI7mv4bWQE9jqWDzF9E2zIf15mVKCAzZVr6Ixu5jCZqGKxnPvDe84L2Zj2ft0) |
-| Creating silver-standard label |                        | [Classification of neurologic outcomes from medical notes using natural language processing](https://www.sciencedirect.com/science/article/pii/S0957417422021893)                                                                                                                                                                                                                      |
-| Creating silver-standard label | Medical experts review |                                                                                                                                                                                                                                                                                                                                                                                        |
+| Creating silver-standard label | TBD                    | [Performance of a Machine Learning Algorithm Using Electronic Health Record Data to Identify and Estimate Survival in a Longitudinal Cohort of Patients With Lung Cancer](https://jamanetwork.com/journals/jamanetworkopen/article-abstract/2781685)                                                                                                                                   |
+| Creating silver-standard label | TBD                    | [Development of a Natural Language Processing System for Extracting Rheumatoid Arthritis Outcomes From Clinical Notes Using the National Rheumatology Informatics System for Effectiveness Registry](https://acrjournals.onlinelibrary.wiley.com/doi/abs/10.1002/acr.24869?casa_token=qBHRelp_VTcAAAAA%3AMzpKqHU2T8Fuzj6GI7mv4bWQE9jqWDzF9E2zIf15mVKCAzZVr6Ixu5jCZqGKxnPvDe84L2Zj2ft0) |
+| Creating silver-standard label | TBD                    | [Classification of neurologic outcomes from medical notes using natural language processing](https://www.sciencedirect.com/science/article/pii/S0957417422021893)                                                                                                                                                                                                                      |
+| Creating silver-standard label | Medical experts review | TBD                                                                                                                                                                                                                                                                                                                                                                                    |
 
 ##### Feature selection
 
@@ -113,3 +113,19 @@ Format all the data we gain in the previous steps into below files :
 ![**Figure 5:** Example of embedding data](Embedding.jpg)
 
 ![**Figure 6:** Example of variable list](Variable_list.jpg)
+
+## Step 4: Performing LATTE
+
+The following pictures shows a breif description of the pipeline of LATTE.
+
+![**Figure 6**](LATTE1.jpg)
+
+![**Figure 7**](LATTE2.jpg)
+
+| Name            | Description                                                        | Links                                            | References |
+|------------------|------------------|------------------|-------------------|
+| Modified LATTE  | A modified explanation of LATTE                                    | [Modified LATTE](LATTE_files\Modified_LATTE.pdf) | TBD        |
+| Data generation | A detailed explanation of generating data(for simulation) in LATTE | [Data generation](LATTE_files\LatteDataGen.pdf)  | TBD        |
+| Main program    | The R codes of LATTE                                               | [Main](LATTE_files\main.R)                       | TBD        |
+| Functions       | The functions invovle in the main program                          | [Functions](LATTE_files\main.R)                  | TBD        |
+| Getting folders | The R code to get folders for LATTE                                | [Get fold](LATTE_files\get_Folds.R)              | TBD        |
