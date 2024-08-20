@@ -51,7 +51,7 @@ This is a visualization tool for aggregating codified data.
 We will extract the NLP mentions from the free-text clinical notes and map them into the Concept Unique Identifiers (CUIs) in the Unified Medical Language System (UMLS).
 
 | Use                       | Method                                         | Links                                                     | References                                                                                                                                                                                                                                                        |
-|-----------------|---------------------|-----------------|-----------------|
+|------------------|-------------------|------------------|------------------|
 | Processing narrative data | Narrative Information Linear Extraction (NILE) | [NILE](https://celehs.hms.harvard.edu/software/NILE.html) | [The UMLS project: making the conceptual connection between users and the information they need.](https://www.ncbi.nlm.nih.gov/pmc/articles/PMC225759/) , [NILE: Fast Natural Language Processing for Electronic Health Records](https://arxiv.org/abs/1311.6063) |
 
 ##### Summarizing
@@ -63,7 +63,7 @@ The result of the codified data aggregation and narrative data processing will b
 We are going to use high-throughput **M**ultimodal **A**utomated **P**henotyping **(MAP)** algorithm to complete the phenotyping. MAP is a algorithm used to predict the probability of the patient having a certain outcome (eg: target disease) based on the counts of ICD codes, NLP mentions, and visits. The MAP will automatically generate a threshold based on the data. The details of MAP can be found in [High-throughput multimodal automated phenotyping (MAP) with application to PheWAS](https://academic.oup.com/jamia/article-abstract/26/11/1255/5544731)
 
 | Use         | Method                                                | Links                           | References                                                                                                                                              |
-|-----------------|-----------------|-----------------|---------------------|
+|------------------|------------------|------------------|-------------------|
 | Phenotyping | MAP(high-throughput Multimodal Automated Phenotyping) | "MAP" package is available in R | [High-throughput multimodal automated phenotyping (MAP) with application to PheWAS](https://academic.oup.com/jamia/article-abstract/26/11/1255/5544731) |
 
 ![**Figure 2:** The example of MAP input.](MAP_input.jpg)
@@ -79,3 +79,11 @@ LATTE needs both golden-label and silver-label in order to train the algorithm. 
 ##### Creating Silver-standard label
 
 Silver standard labels can be constructed for each patient-period according to frequency of assessment determined in EHR data processing section.
+
+| Use                            | Method                 | Links                                                                                                                                                                                                                                                                                                                                                                                  |
+|---------------------------|------------------|---------------------------|
+| Creating silver-standard label | Diagnosis code counts  | [LATTE: Label-efficient incident phenotyping from longitudinal electronic health records](https://www.cell.com/patterns/fulltext/S2666-3899(23)00313-6) , [A semi-supervised adaptive Markov Gaussian embedding process (SAMGEP) for prediction of phenotype event times using the electronic health record](https://www.nature.com/articles/s41598-022-22585-3)                       |
+| Creating silver-standard label |                        | [Performance of a Machine Learning Algorithm Using Electronic Health Record Data to Identify and Estimate Survival in a Longitudinal Cohort of Patients With Lung Cancer](https://jamanetwork.com/journals/jamanetworkopen/article-abstract/2781685)                                                                                                                                   |
+| Creating silver-standard label |                        | [Development of a Natural Language Processing System for Extracting Rheumatoid Arthritis Outcomes From Clinical Notes Using the National Rheumatology Informatics System for Effectiveness Registry](https://acrjournals.onlinelibrary.wiley.com/doi/abs/10.1002/acr.24869?casa_token=qBHRelp_VTcAAAAA%3AMzpKqHU2T8Fuzj6GI7mv4bWQE9jqWDzF9E2zIf15mVKCAzZVr6Ixu5jCZqGKxnPvDe84L2Zj2ft0) |
+| Creating silver-standard label |                        | [Classification of neurologic outcomes from medical notes using natural language processing](https://www.sciencedirect.com/science/article/pii/S0957417422021893)                                                                                                                                                                                                                      |
+| Creating silver-standard label | Medical experts review |                                                                                                                                                                                                                                                                                                                                                                                        |
