@@ -87,3 +87,29 @@ Silver standard labels can be constructed for each patient-period according to f
 | Creating silver-standard label |                        | [Development of a Natural Language Processing System for Extracting Rheumatoid Arthritis Outcomes From Clinical Notes Using the National Rheumatology Informatics System for Effectiveness Registry](https://acrjournals.onlinelibrary.wiley.com/doi/abs/10.1002/acr.24869?casa_token=qBHRelp_VTcAAAAA%3AMzpKqHU2T8Fuzj6GI7mv4bWQE9jqWDzF9E2zIf15mVKCAzZVr6Ixu5jCZqGKxnPvDe84L2Zj2ft0) |
 | Creating silver-standard label |                        | [Classification of neurologic outcomes from medical notes using natural language processing](https://www.sciencedirect.com/science/article/pii/S0957417422021893)                                                                                                                                                                                                                      |
 | Creating silver-standard label | Medical experts review |                                                                                                                                                                                                                                                                                                                                                                                        |
+
+##### Feature selection
+
+The ONCE provides a “importance score” metric, selection will be based on this metric. We recommend to set the threshold as 0.1 and keep those exceed 0.1. The processing of feature selection can also be combined with medical experts review or opinion.
+
+| Use               | Method | Links                                        | Reference                                                                                                                        |
+|------------------|------------------|------------------|-------------------|
+| Feature selection | ONCE   | [ONCE](https://shiny.parse-health.org/ONCE/) | [Knowledge-Driven Online Multimodal Automated Phenotyping System](https://www.medrxiv.org/content/10.1101/2023.09.29.23296239v1) |
+
+##### Formatting the input data
+
+Format all the data we gain in the previous steps into below files :
+
+| File           | Name          | Component                                                                                                                                                                                |
+|---------------------------|--------------------------|-------------------|
+| training data  | train.csv     | “ID” – patient number, “T” – period, “bool_data” – follow-up indicator, “Y” – gold-standard labels on target clinical outcomes, “silver” – silver standard labels, K = maximal follow-up |
+| testing data   | test.csv      | Same as training data                                                                                                                                                                    |
+| embedding      | embedding.csv | TBD                                                                                                                                                                                      |
+| variable lists | kn_var.csv    | TBD                                                                                                                                                                                      |
+| variable lists | other_var.csv | TBD                                                                                                                                                                                      |
+
+![**Figure 4:** Example of training and testing data](Training_testing.jpg)
+
+![**Figure 5:** Example of embedding data](Embedding.jpg)
+
+![**Figure 6:** Example of variable list](Variable_list.jpg)
