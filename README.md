@@ -116,7 +116,7 @@ Format all the data we gain in the previous steps into below files :
 
 ## Step 4: Performing LATTE
 
-The following pictures shows a breif description of the pipeline of LATTE.
+The following pictures shows a brief description of the pipeline of LATTE.
 
 ![**Figure 6**](LATTE1.jpg)
 
@@ -129,3 +129,11 @@ The following pictures shows a breif description of the pipeline of LATTE.
 | Main program    | The R codes of LATTE                                               | [Main](https://github.com/SHENRMARKDOWN/Protocol-for-deriving-longitudinal-Clinical-Outcomes-from-electronic-health-records/blob/main/LATTE_files/main.R)                              | TBD        |
 | Functions       | The functions invovle in the main program                          | [Functions](https://github.com/SHENRMARKDOWN/Protocol-for-deriving-longitudinal-Clinical-Outcomes-from-electronic-health-records/blob/main/LATTE_files/simulation_data_functions_v4.R) | TBD        |
 | Getting folders | The R code to get folders for LATTE                                | [Get fold](https://github.com/SHENRMARKDOWN/Protocol-for-deriving-longitudinal-Clinical-Outcomes-from-electronic-health-records/blob/main/LATTE_files/get_Folds.R)                     | TBD        |
+
+##### (Optional) Combining the result from LATTE with other Machine Learning Methods
+
+| Use                                    | Method        | Links | Reference                                                                                                                                                                                                                                                                                                                                                |
+|----------------------------------------|---------------|-------|----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------|
+| Standard (supervised) machine learning | LASSO         | NA    | [Regression Shrinkage and Selection Via the Lasso](https://academic.oup.com/jrsssb/article/58/1/267/7027929) , [The Adaptive Lasso and Its Oracle Properties](https://www-tandfonline-com.ezp3.lib.umn.edu/doi/abs/10.1198/016214506000000735?casa_token=qK9SrbgcCEgAAAAA%3A-k4kYOp8v-ElzBcolgMwpCoTUymINXwn4TvXCYS8T7k3KH9p4NDhbIxnG5lei6oucsmyt-qtvQ&) |
+| Standard (supervised) machine learning | Random Forest | NA    | [Random Forests](https://link.springer.com/article/10.1023/a:1010933404324)                                                                                                                                                                                                                                                                              |
+| Standard (supervised) machine learning | Boosting      | NA    | [The strength of weak learnability](https://link.springer.com/article/10.1007/bf00116037) , [XGBoost: A Scalable Tree Boosting System](https://dl.acm.org/doi/abs/10.1145/2939672.2939785)                                                                                                                                                               |
