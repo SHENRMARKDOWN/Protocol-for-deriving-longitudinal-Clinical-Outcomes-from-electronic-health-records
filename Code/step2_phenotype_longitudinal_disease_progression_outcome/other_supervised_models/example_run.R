@@ -46,8 +46,6 @@ fts <- read.csv(file.path(input_dir,"df_fts.csv"))$x
 
 # discretization & cleaning: suppose that 4 is the cutoff threshold        
 .y <- df_train$Y[!is.na(df_train$Y)]
-.y[.y < 4] <- 0
-.y[.y >= 4] <- 1
 score = as.factor(.y)
 
 
@@ -92,8 +90,6 @@ saveRDS(xgb, xgb_dir)
   mutate_all(~ .x /max(1,(max(.x) - min(.x)))) %>% as.matrix()
 
 .test_y <- df_test$Y[!is.na(df_test$Y)]
-.test_y[.test_y < 4] <- 0
-.test_y[.test_y >= 4] <- 1
 score_test = as.factor(.test_y)
 
 .test_x_xgb <- list("data" = as.matrix(.test_x),
