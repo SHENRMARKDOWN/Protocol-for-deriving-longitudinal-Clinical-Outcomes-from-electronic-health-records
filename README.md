@@ -75,6 +75,12 @@ We are going to use high-throughput **M**ultimodal **A**utomated **P**henotyping
 |------------------|------------------|------------------|-------------------|
 | Phenotyping | MAP(high-throughput Multimodal Automated Phenotyping) | "MAP" package is available in R | [High-throughput multimodal automated phenotyping (MAP) with application to PheWAS](https://academic.oup.com/jamia/article-abstract/26/11/1255/5544731) |
 
+##### - Code directory
+
+| Name | Description                            | Links                                                                                                                                                                                  |
+|-------------------|----------------------------------|-------------------|
+| MAP  | An example of how to run MAP algorithm | [map_example.R](https://github.com/SHENRMARKDOWN/Protocol-for-deriving-longitudinal-Clinical-Outcomes-from-electronic-health-records/tree/main/Code/step1_disease_cohort_construction) |
+
 ### Step 2: Phenotyping Longitudinal Disease Progression Outcome
 
 #### Data Preparation
@@ -141,7 +147,16 @@ To enhance prediction accuracy, LATTE's imputed disease progression outcomes can
 | Standard (supervised) machine learning | Random Forest | NA    | [Random Forests](https://link.springer.com/article/10.1023/a:1010933404324)                                                                                                                                                                                                                                                                              |
 | Standard (supervised) machine learning | Boosting      | NA    | [The strength of weak learnability](https://link.springer.com/article/10.1007/bf00116037) , [XGBoost: A Scalable Tree Boosting System](https://dl.acm.org/doi/abs/10.1145/2939672.2939785)                                                                                                                                                               |
 
-TO ADD: directory to the codes: Code/step2_phenotype_longitudinal_disease_progression_outcome/ensemble/example_ensemble.R
+TO ADD: directory to the codes: Code/step2_phenotype_longitudinal_disease_progression_outcome/ensemble/example_ensemble.
+
+##### - Code directory
+
+| Name                   | Description                                                                                       | Links                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                       |
+|------------------|------------------------------------|------------------|
+| LATTE                  | Transformer, preprocessing, semi-mode, input arguments, main codes, test and utilization of LATTE | [LATTE](https://github.com/SHENRMARKDOWN/Protocol-for-deriving-longitudinal-Clinical-Outcomes-from-electronic-health-records/tree/main/Code/step2_phenotype_longitudinal_disease_progression_outcome/LATTE)                                                                                                                                                                                                                                                                                                 |
+| Ensemble               | An example of ensemble                                                                            | [example_ensemble.R](https://github.com/SHENRMARKDOWN/Protocol-for-deriving-longitudinal-Clinical-Outcomes-from-electronic-health-records/tree/main/Code/step2_phenotype_longitudinal_disease_progression_outcome/ensemble)                                                                                                                                                                                                                                                                                 |
+| Other supervised model | An example of other supervised models                                                             | [example_run.R](https://github.com/SHENRMARKDOWN/Protocol-for-deriving-longitudinal-Clinical-Outcomes-from-electronic-health-records/tree/main/Code/step2_phenotype_longitudinal_disease_progression_outcome/other_supervised_models)                                                                                                                                                                                                                                                                       |
+| Simulation data        | Simulation                                                                                        | [Simulation data generation](https://github.com/SHENRMARKDOWN/Protocol-for-deriving-longitudinal-Clinical-Outcomes-from-electronic-health-records/tree/main/Code/step2_phenotype_longitudinal_disease_progression_outcome/simulated_input_data/simulated_data_generation) , [Simulation](https://github.com/SHENRMARKDOWN/Protocol-for-deriving-longitudinal-Clinical-Outcomes-from-electronic-health-records/tree/main/Code/step2_phenotype_longitudinal_disease_progression_outcome/simulated_input_data) |
 
 ### Step 3: **Calibrating Causal Analysis with Real-World Evidence**
 
@@ -166,3 +181,9 @@ Several calibration methods exist for causal analysis. Here, we focus on the met
 -   ATE Estimation
 
 TO ADD: directory to the codes: Code/step3_causal_calibration/example_calibration.R
+
+##### - Code directory
+
+| Name               | Description               | Link                                                                                                                                                                                  |
+|-----------------|--------------------------------------|-----------------|
+| Causal calibration | An example of calibration | [example_calibration.R](https://github.com/SHENRMARKDOWN/Protocol-for-deriving-longitudinal-Clinical-Outcomes-from-electronic-health-records/tree/main/Code/step3_causal_calibration) |
