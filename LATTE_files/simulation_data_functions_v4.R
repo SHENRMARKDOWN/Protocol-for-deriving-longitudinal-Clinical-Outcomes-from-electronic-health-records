@@ -189,7 +189,7 @@ gen_emb <- function(train_file,test_file,embeddings_file)
     }
   }
   
-  SPPMI_matrix = calculate_SPPMI(cooccurrence_matrix,num_W_vars)
+  SPPMI_matrix = calculate_SPPMI(cooccurrence_matrix,k=1,num_W_vars=num_W_vars)
   
   embeddings = obtain_embeddings(SPPMI_matrix)
   
