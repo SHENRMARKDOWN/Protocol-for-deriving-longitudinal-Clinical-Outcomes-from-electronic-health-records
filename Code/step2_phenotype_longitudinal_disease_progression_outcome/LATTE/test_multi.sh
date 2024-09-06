@@ -17,14 +17,14 @@ module load conda2/4.2.13
 source activate /home/jh502/.conda/envs/env_incident
 
 # updated
-python3 c_main_multi.py --train_dfname "test_input/synthetic_multi_train.csv" \
-                  --test_dfname "test_input/synthetic_multi_test.csv" \
-                  --ftsname "test_input/synthetic_fts.csv" \
-                  --other_ftsname "test_input/synthetic_otherfts.csv" \
+python3 c_main_multi.py --train_dfname "example_input/train.csv" \
+                  --test_dfname "example_input/test.csv" \
+                  --ftsname "example_input/w_fts.csv" \
+                  --other_ftsname "example_input/x_fts.csv" \
                     --embed_dim 14 \
-                    --embed_fname "test_input/synthetic_embedding.csv" \
-                    --key_code "Code:6" \
-                    --output_directory "test_out/" \
+                    --embed_fname "example_input/embeddings.csv" \
+                    --key_code "W1" \
+                    --output_directory "example_out/" \
                     --output_fname "synthetic_test" \
                     --epochs 10 \
                     --max_visits 24 \
