@@ -1,0 +1,6 @@
+tensorflow==2.3.0
+sklearn
+pandas
+argparse
+pyhere
+click
