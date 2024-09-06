@@ -189,7 +189,7 @@ gen_emb <- function(train_file,test_file,embeddings_file)
     }
   }
   
-  SPPMI_matrix = calculate_SPPMI(cooccurrence_matrix)
+  SPPMI_matrix = calculate_SPPMI(cooccurrence_matrix,num_W_vars)
   
   embeddings = obtain_embeddings(SPPMI_matrix)
   
@@ -201,7 +201,7 @@ gen_emb <- function(train_file,test_file,embeddings_file)
 
 
 # Calculate SPPMI Matrix
-calculate_SPPMI <- function(cooccurrence_matrix, k = 1) 
+calculate_SPPMI <- function(cooccurrence_matrix, k = 1,num_W_vars) 
 {
 
   total_occurrences <- sum(cooccurrence_matrix)
