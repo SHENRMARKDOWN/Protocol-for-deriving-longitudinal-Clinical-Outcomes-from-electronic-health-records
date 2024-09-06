@@ -11,7 +11,7 @@ train_num = 1000
 test_num = 500
 train_file = "train.csv"
 test_file = "test.csv"
-embeddings_file = "embeddsing.csv"
+embeddings_file = "embeddings.csv"
 w_fts = "w_fts.csv"
 x_fts = "x_fts.csv"
 
