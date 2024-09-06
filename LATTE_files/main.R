@@ -1,60 +1,57 @@
-# TODO: change the home dir
-mdir = "C:/Users/NORTH/source/incident_phenotyping/"
-
 library(MAP)
 library(ff)
 library(data.table)
+library(MASS)
+source("simulation_data_functions_v4.R")
 
-args = commandArgs(trailingOnly = TRUE)
 
 
-total_data_num = as.numeric(args[1])
-# 37736
-labeled_data_num = as.numeric(args[2])
-# 1000
-num.train = args[3]
-
-#"cum": cumulative counts; "stacked": stacked counts
-num.test = args[4]
+set.seed(123)  #
+train_num = 1000
+test_num = 500
+train_file = "train.csv"
+test_file = "test.csv"
+embeddings_file = "embeddsing.csv"
+w_fts = "w_fts.csv"
+x_fts = "x_fts.csv"
 
 #----------------------------------------
 # data generation #
 #----------------------------------------
-source(paste0(mdir,'/simulation_data_functions_v4.R'))
-source(paste0(mdir,"/get_Folds.R"))
-
-A<-matrix(rep(c(1,-2),50),10)
-pmean <- function(x,y) (x+y)/2
-A[] <- pmean(A, matrix(A, nrow(A), byrow=TRUE))
-s<-matrix(rep(1,100),10)-2*A+diag(rep(c(0.5,-4.5),5))
-
-
-Sigma_filename = 'data/Sigma.csv'
-Sigma = read.csv(paste0(mdir, Sigma_filename))
-Norms_filename = 'data/Norms.csv'
-Norms = read.csv(paste0(mdir, Norms_filename))
-
-# print(Sigma)
-
-
-# data.1.1
-
-
-gen_data_2(total_data_num, p=10, Sigma, Norms, T.family = 'linear',
-     T.b0 = -3, T.beta = 0.5*c(1,-1,-2,-2, 1,-1,-2,-2, 1,-2), T.coef = 0.05,
-     C.rate = 0.5, filename = paste0(mdir,'Simulation/SimDat/SimDat.1/','SimDat.1.csv'),dataname =paste0(mdir,'Simulation/SimDat/SimDat.1/','SimDat.1.Rds'))
-
-
-# data.1.2
-
-gen_data_2(total_data_num, p=10, Sigma, Norms, T.family = 'quadratic',
-     T.b0 = -30, T.beta = 0.5*c(1,-1,-2,-2, 1,-1,-2,-2, 1,-2), T.B = -1*s, T.coef = 0.05,
-     C.rate = 0.5, filename = paste0(mdir,'Simulation/SimDat/SimDat.2/','SimDat.2.csv'),dataname =paste0(mdir,'Simulation/SimDat/SimDat.2/','SimDat.2.Rds'))
 
 
 
-for (data.file in c('SimDat.1','SimDat.2')) {
-   label_split(data.file,label.num = labeled_data_num, total = total_data_num)
-   getFolds_RP_v2(phe.nm = data.file, Observation_years = 2, ntrain = num.train, ntest = as.numeric(num.test))
-}
+#Generate Parameter a,b,c
+R <- matrix(c(
+  1, 0.8, 0.5, 0.3, 0.2,0.5,
+  0.8, 1, 0.4, 0.3, 0.2,0.5,
+  0.5, 0.4, 1, 0.3, 0.3,0.5,
+  0.3, 0.3, 0.3, 1, 0.4,0.3,
+  0.2, 0.2, 0.3, 0.4, 1,0.2,
+  0.1, 0.8, 0.3, 0.4, 0.5, 1
+), nrow = 6, ncol = 6)
+a_tilde <- mvrnorm(n = 1, mu = rep(0, 6), Sigma = R)
+a <- 0.2 * pnorm(a_tilde)
+b_tilde <- mvrnorm(n = 1, mu = rep(0, 6), Sigma = R)
+b <- 0.5 * pnorm(b_tilde)
+c_tilde <- mvrnorm(n = 1, mu = rep(0, 6), Sigma = R)
+c <- 0.1 * pnorm(c_tilde)
 
+#Generate Train Data
+gen_data(train_num, p=10,
+     T.b0 = -3, T.beta = 0.5*c(1,-1,-2,-2, 1,-1,-2,-2, 1,-2), T.coef = 0.6,
+     C.rate = 0.5,a,b,c, 
+     filename =  train_file)
+
+#Generate Test Data
+gen_data(test_num, p=10, 
+           T.b0 = -3, T.beta = 0.5*c(1,-1,-2,-2, 1,-1,-2,-2, 1,-2), T.coef = 0.6,
+           C.rate = 0.5,a,b,c, 
+           filename = test_file)
+
+#Generate Embeddsing of W Variables
+gen_emb(train_file,test_file,embeddings_file)
+
+#Generate Fts Files
+gen_fts(w_fts)
+gen_fts(x_fts)
