@@ -17,7 +17,7 @@ module load conda2/4.2.13
 source activate /home/jh502/.conda/envs/env_incident
 
 # updated
-python3 c_main_multi.py --train_dfname "example_input/train.csv" \
+python3 c_main.py --train_dfname "example_input/train.csv" \
                   --test_dfname "example_input/test.csv" \
                   --ftsname "example_input/w_fts.csv" \
                   --other_ftsname "example_input/x_fts.csv" \

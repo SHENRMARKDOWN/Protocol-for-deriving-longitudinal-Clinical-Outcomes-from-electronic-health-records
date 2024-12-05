@@ -1,6 +1,6 @@
-from b_input_args_multi import parse_arguments
-from a_semi_model_multi import Model_prediction,train_model
-from a_preprocess_multi import format_input_data
+from Code.step2_phenotype_longitudinal_disease_progression_outcome.LATTE.b_input_args import parse_arguments
+from Code.step2_phenotype_longitudinal_disease_progression_outcome.LATTE.a_semi_model import Model_prediction,train_model
+from a_preprocess import format_input_data
 import os
 import tensorflow as tf
 import numpy as np
