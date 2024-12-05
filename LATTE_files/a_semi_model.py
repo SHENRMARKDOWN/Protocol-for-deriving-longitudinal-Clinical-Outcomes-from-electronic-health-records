@@ -337,7 +337,7 @@ def train_step(Y_nlev, train_prevalence_incident, train_loss_prevalence,train_lo
                 X_other_fts_train,
                 X_other_fts_unsuper,
                 patient_num,
-                silver_train, silver_unsuper, weight_prevalence, weight_unlabel, weight_contrastive, weight_smooth, flag_silver=False, flag_relapse=False):
+                silver_train, silver_unsuper, weight_prevalence, weight_unlabel, flag_silver=False, flag_relapse=False):
     with tf.GradientTape(persistent=True) as tape:
         # Question: what are the thresholdings for?
         threshold_embedding = 10.0
@@ -689,7 +689,7 @@ def train_step_silver(train_prevalence_incident, train_loss_prevalence,train_los
                 X_other_fts_train,
                 X_other_fts_unsuper,
                 patient_num,
-                silver_train, silver_unsuper, weight_prevalence, weight_unlabel, weight_contrastive, weight_smooth, flag_relapse=False):
+                silver_train, silver_unsuper, weight_prevalence, weight_unlabel, flag_relapse=False):
 
     with tf.GradientTape(persistent=True) as tape:
 
@@ -1023,7 +1023,7 @@ def valid_step(Y_nlev, valid_loss, model, X_test, labels, weights, has_data_loc_
 #                                  Main Function to Train Model                                   #
 ###################################################################################################
 
-def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unlabel, weight_contrastive, weight_smooth, weight_additional, flag_save_attention, flag_prediction, flag_relapse, epochs, epoch_silver, output_fname,output_directory):
+def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unlabel, weight_additional, flag_save_attention, flag_prediction, flag_relapse, epochs, epoch_silver, output_fname,output_directory):
     # print("--------begin model training.....")
 
     # initialize optimizers and losses
@@ -1161,7 +1161,7 @@ def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unl
                                                         X_other_fts_train_batch, X_other_fts_unsuper_batch,
                                                         patient_num_train,
                                                         silver_train_batch, silver_unsuper_batch,
-                                                        weight_prevalence, weight_unlabel, weight_contrastive,weight_smooth,
+                                                        weight_prevalence, weight_unlabel,
                                                         flag_relapse)
 
 
@@ -1184,7 +1184,7 @@ def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unl
                                                     X_other_fts_train_batch, X_other_fts_unsuper_batch,
                                                     patient_num_train,
                                                     silver_train_batch, silver_unsuper_batch,
-                                                    weight_prevalence, weight_unlabel, weight_contrastive,weight_smooth,
+                                                    weight_prevalence, weight_unlabel,
                                                     flag_silver,flag_relapse)
 ### This block of code is reorganized by Amiee for better understanding and formatting
 # START Block

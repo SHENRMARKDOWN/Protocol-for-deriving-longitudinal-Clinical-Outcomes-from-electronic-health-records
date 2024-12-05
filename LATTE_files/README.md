@@ -30,7 +30,7 @@ Directly run the `main.R` file in SimulationDataGen folder. You can also change 
 
 ## Run the Model
 
-Please set the parameters in `test.sh` file according to your file path.
+Please set the parameters in `test.sh` file according to your file path and some other settings.
 ```
 sh test.sh
 ```

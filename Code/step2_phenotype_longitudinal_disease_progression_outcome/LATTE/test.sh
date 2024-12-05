@@ -6,10 +6,10 @@
 #SBATCH -t 1:00:00                     # Runtime in D-HH:MM format
 #SBATCH -p short                   # Partition to run in
 #SBATCH --mem=10G                          # Memory total in MB (for all cores)
-#SBATCH -o jobs/testmulti_JID%j.out                 # File to which STDOUT will be written, including job ID
-#SBATCH -e jobs/testmulti_JID%j.err                 # File to which STDERR will be written, including job ID
+#SBATCH -o jobs/test_JID%j.out                 # File to which STDOUT will be written, including job ID
+#SBATCH -e jobs/test_JID%j.err                 # File to which STDERR will be written, including job ID
 #SBATCH --mail-type=ALL                    # Type of email notification- BEGIN,END,FAIL,ALL
-#SBATCH --mail-user=juehou@hsph.harvard.edu   # Email to which notifications will be sent
+#SBATCH --mail-user=   # Email to which notifications will be sent
 
 module load gcc/6.2.0
 module load conda2/4.2.13
@@ -17,6 +17,7 @@ module load conda2/4.2.13
 source activate /home/jh502/.conda/envs/env_incident
 
 # updated
+# the details of input arg is accessible in b_input_args.py file
 python3 c_main.py --train_dfname "example_input/train.csv" \
                   --test_dfname "example_input/test.csv" \
                   --ftsname "example_input/w_fts.csv" \
@@ -35,8 +36,6 @@ python3 c_main.py --train_dfname "example_input/train.csv" \
                     --layers_incident "120" \
                     --weight_prevalence 0.3 \
                     --weight_unlabel 0.3 \
-                    --weight_contrastive  0.0 \
-                    --weight_smooth  0.0 \
                     --weight_additional  0.0 \
                     --flag_save_attention 1 \
                     --flag_load_model 0 \

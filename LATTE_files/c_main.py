@@ -44,8 +44,6 @@ if __name__ == '__main__':
     layers_incident = args.layers_incident
     weight_prevalence = args.weight_prevalence
     weight_unlabel = args.weight_unlabel
-    weight_contrastive = args.weight_contrastive
-    weight_smooth = args.weight_smooth
     weight_additional = args.weight_additional
     flag_save_attention = args.flag_save_attention
     flag_load_model = args.flag_load_model
@@ -232,7 +230,7 @@ if __name__ == '__main__':
     if os.path.exists(savename_model) and flag_load_model > 0:
         print("---------------------------------------------loadding saved model....................")
         model = tf.keras.models.load_model(savename_model)
-    train_model(Y_nlev,model, ds_train, ds_test, weight_prevalence, weight_unlabel, weight_contrastive, 
-                                weight_smooth, weight_additional, flag_save_attention, flag_prediction, flag_relapse, epochs=epochs, epoch_silver=epoch_silver, output_fname=output_fname,output_directory=output_directory)
+    train_model(Y_nlev,model, ds_train, ds_test, weight_prevalence, weight_unlabel,
+                                weight_additional, flag_save_attention, flag_prediction, flag_relapse, epochs=epochs, epoch_silver=epoch_silver, output_fname=output_fname,output_directory=output_directory)
     print("---------------------------------------------saving model....................")
     model.save(savename_model)
