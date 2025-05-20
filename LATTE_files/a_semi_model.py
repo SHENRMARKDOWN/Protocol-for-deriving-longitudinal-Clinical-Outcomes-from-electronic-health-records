@@ -1,4 +1,3 @@
-
 import numpy as np
 import pandas as pd
 import random
@@ -1675,7 +1674,7 @@ def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unl
             y_true_get_test = np.squeeze(y_true_get_test)
             Prevalence_multi_total_test = np.squeeze(Prevalence_multi_total_test)
 
-            if epoch_num > 5:
+            if epoch_num > 10:
                 if True:
                     # print("---------saving--- ", output_directory, ": ", output_fname)
                     patient_num_test_total2, date_test_total2, y_pred_get2, y_true_get2 = \
@@ -1702,12 +1701,15 @@ def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unl
                     df["weight" + str(random.randint(0, 1000))] = weights_save
                     df.to_csv(savename_weights, index=False)
                 if True:
-                    # # print("---------saving--- ", output_directory, ": ", output_fname)
-                    # # print("Prevalence_prediction_total_test: ", len(Prevalence_prediction_total_test))
-                    # # print("len(Prevalence_prediction_total_test): ",
+                    print("---------saving--- ", output_directory, ": ", output_fname)
+                    # print("Prevalence_prediction_total_test: ", len(Prevalence_prediction_total_test))
+                    # print("len(Prevalence_prediction_total_test): ",
                     #         np.array(Prevalence_prediction_total_test).shape)
-                    # # print("len(labels_prevalence_total_test): ", np.array(labels_prevalence_total_test).shape)
-                    dataframe = pd.DataFrame({'ID': patient_num_test_prevalence,
+                    # print("len(labels_prevalence_total_test): ", np.array(labels_prevalence_total_test).shape)
+                    # print("len(patient_num_test_prevalence): ", len(patient_num_test_prevalence))
+                    # print("len(patient_num_test_total): ", len(patient_num_test_total))
+                    # print("len(np.unique(patient_num_test_total)): ", len(np.unique(patient_num_test_total)))
+                    dataframe = pd.DataFrame({'ID': np.unique(patient_num_test_total),
                                                 'Y': np.array((labels_prevalence_total_test)).reshape(
                                                     len(labels_prevalence_total_test),),
                                                 'LP': np.array(Prevalence_prediction_total_test).reshape(
@@ -1718,31 +1720,31 @@ def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unl
                     dataframe = pd.concat([dataframe,df_pred],axis = 1)
                     dataframe.to_csv(output_directory + "Prevalence_" + "_" + flag_save + "_" + output_fname, index=True,
                                         sep=',')
-                    # print("---------saving ends successfully--- ", output_directory, ": ", output_fname)
+                    print("---------saving ends successfully--- ", output_directory, ": ", output_fname)
 
-            # if epoch_num > epochs - 2 and flag_save_finish == False:
-            #     flag_save_finish = True
-            #     if True:
-            #         f = open(output_directory + output_fname + "_epoch" + str(epoch_num) + "_incident_evaluation.txt", 'a')
-            #         f.write("Threshold value=0.5 AUC_train :%4f , NPV:%4f ,Specificity:%4f, F1:%4f ,"
-            #                 " PPV:%4f , Sensitvity:%4f, AUC:%4f" % (
-            #                     AUC_train, NPV, specificity, f_1, PPV, sensitivity, AUC_test))
-            #         f.write("\r")
-            #         f.close()
-            #     if True:
-            #         f = open(output_directory + output_fname+ "_epoch" + str(epoch_num) + "_prevalence_evaluation.txt", 'a')
-            #         f.write(" Threshold value=0.5 AUC_train :%4f , ACC_train:%4f, ,FPR:%4f, FNR:%4f, NPV_MLP:%4f "
-            #                 " ,AUC_test_comb:%4f,  AUC_test_TF:%4f, AUC_test_incident:%4f,"
-            #                 "ACC_test:%4f "
-            #                 ", Speci:%4f ,Sensi:%4f, PPV:%4f"
-            #                 % (
-            #                     AUC_prevalence_train, acc_train_MLP, FPR, FNR, NPV_test_prevalence, AUC_prevalence_test,
-            #                     AUC_prevalence_test_MLP_only, AUC_prevalence_test_incident_only,
-            #                     acc_test_MLP, specificity_test_prevalence,
-            #                     sensitivity_test_prevalence,
-            #                     PPV_test_prevalence))
-            #         f.write("\r")
-            #         f.close()
+            if epoch_num > epochs - 2 and flag_save_finish == False:
+                flag_save_finish = True
+                if True:
+                    f = open(output_directory + output_fname + "_epoch" + str(epoch_num) + "_incident_evaluation.txt", 'a')
+                    f.write("Threshold value=0.5 AUC_train :%4f , NPV:%4f ,Specificity:%4f, F1:%4f ,"
+                            " PPV:%4f , Sensitvity:%4f, AUC:%4f" % (
+                                AUC_incident_train_total, NPV, specificity, f_1, PPV, sensitivity, AUC_incident_test))
+                    f.write("\r")
+                    f.close()
+                if True:
+                    f = open(output_directory + output_fname+ "_epoch" + str(epoch_num) + "_prevalence_evaluation.txt", 'a')
+                    f.write(" Threshold value=0.5 AUC_train :%4f , ACC_train:%4f, ,FPR:%4f, FNR:%4f, NPV_MLP:%4f "
+                            " ,AUC_test_comb:%4f,  AUC_test_TF:%4f, AUC_test_incident:%4f,"
+                            "ACC_test:%4f "
+                            ", Speci:%4f ,Sensi:%4f, PPV:%4f"
+                            % (
+                                AUC_prevalence_train_total, 0.0, 0.0, 0.0, NPV, AUC_incident_test,
+                                0.0, 0.0,
+                                0.0, specificity,
+                                sensitivity,
+                                PPV))
+                    f.write("\r")
+                    f.close()
 
         valid_loss.reset_states()
         train_metric.reset_states()
