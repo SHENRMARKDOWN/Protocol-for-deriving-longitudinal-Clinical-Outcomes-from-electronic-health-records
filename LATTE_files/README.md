@@ -20,8 +20,8 @@
 
 ```
 conda create -n LATTE python=3.6.9
-pip install -r requirements.txt. 
 source activate LATTE
+pip install -r requirements.txt. 
 ```
 
 ## Generate Simulation Data
