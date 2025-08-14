@@ -136,6 +136,10 @@ def parse_arguments():
     parser.add_argument("--multi_model", type=str, default=here("base_logit"),
                         help="Specify multi-category model from base_logit (Base Category Logistic, default), cum_logit (Cumulative Logistic), or adj_logit (Adjacent Category Logistic)")
 
+    # Method for calculating longitudinal ordinal scores
+    parser.add_argument("--ordinal_score_method", type=str, default="weighted", choices=["cumulative", "weighted"],
+                        help="Method for calculating longitudinal ordinal scores: 'cumulative' (cumulative probability) or 'weighted' (weighted probability)")
+
     args = parser.parse_args()
 
 

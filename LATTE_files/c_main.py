@@ -1,5 +1,5 @@
-from Code.step2_phenotype_longitudinal_disease_progression_outcome.LATTE.b_input_args import parse_arguments
-from Code.step2_phenotype_longitudinal_disease_progression_outcome.LATTE.a_semi_model import Model_prediction,train_model
+from b_input_args import parse_arguments
+from a_semi_model import Model_prediction,train_model
 from a_preprocess import format_input_data
 import os
 import tensorflow as tf
@@ -50,6 +50,7 @@ if __name__ == '__main__':
     flag_prediction = args.flag_prediction
     flag_relapse = args.flag_relapse
     multi_model = args.multi_model
+    ordinal_score_method = args.ordinal_score_method
 
     if not os.path.exists(output_directory):
         os.mkdir(output_directory)
@@ -231,6 +232,6 @@ if __name__ == '__main__':
         print("---------------------------------------------loadding saved model....................")
         model = tf.keras.models.load_model(savename_model)
     train_model(Y_nlev,model, ds_train, ds_test, weight_prevalence, weight_unlabel,
-                                weight_additional, flag_save_attention, flag_prediction, flag_relapse, epochs=epochs, epoch_silver=epoch_silver, output_fname=output_fname,output_directory=output_directory)
+                                weight_additional, flag_save_attention, flag_prediction, flag_relapse, epochs=epochs, epoch_silver=epoch_silver, output_fname=output_fname,output_directory=output_directory,ordinal_score_method=ordinal_score_method)
     print("---------------------------------------------saving model....................")
     model.save(savename_model)

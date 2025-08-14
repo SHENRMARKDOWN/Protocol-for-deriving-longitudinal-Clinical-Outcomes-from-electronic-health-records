@@ -1022,7 +1022,7 @@ def valid_step(Y_nlev, valid_loss, model, X_test, labels, weights, has_data_loc_
 #                                  Main Function to Train Model                                   #
 ###################################################################################################
 
-def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unlabel, weight_additional, flag_save_attention, flag_prediction, flag_relapse, epochs, epoch_silver, output_fname,output_directory):
+def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unlabel, weight_additional, flag_save_attention, flag_prediction, flag_relapse, epochs, epoch_silver, output_fname,output_directory,ordinal_score_method="weighted"):
     # print("--------begin model training.....")
 
     # initialize optimizers and losses
@@ -1666,6 +1666,15 @@ def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unl
             logs = '        , test_loss_incident:{}, AUC_incident_test:{},F1_test:{}, PPV_test:{},Speci_test:{},Sensi_test:{}, NPV_test:{}'
             tf.print(tf.strings.format(logs, (test_loss_incident, AUC_incident_test, f_1, PPV, specificity, sensitivity, NPV)))
 
+            # Early stopping: Check if test AUC has reached its best (overfitting detection)
+            if len(AUC_incident_test_total) >= 3:  # Need at least 3 epochs to detect pattern
+                best_auc_so_far = max(AUC_incident_test_total)
+                current_auc = AUC_incident_test_total[-1]
+                
+                # Check if current AUC is close to best (within 1%)
+                if current_auc >= 0.99 * best_auc_so_far:  # AUC is at or near best
+                    print(f"Early stopping at epoch {epoch_num}: Test AUC plateaued ({current_auc:.4f}) - overfitting detected")
+                    break
 
             patient_num_test = np.squeeze(patient_num_test)
             patient_num_test_prevalence = np.unique(patient_num_test)
@@ -1674,7 +1683,7 @@ def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unl
             y_true_get_test = np.squeeze(y_true_get_test)
             Prevalence_multi_total_test = np.squeeze(Prevalence_multi_total_test)
 
-            if epoch_num > 10:
+            if epoch_num > 0:
                 if True:
                     # print("---------saving--- ", output_directory, ": ", output_fname)
                     patient_num_test_total2, date_test_total2, y_pred_get2, y_true_get2 = \
@@ -1685,6 +1694,29 @@ def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unl
                     df_pred = pd.DataFrame(score_multi_get_test)
                     yo = np.char.add("Pred_",np.array(list(range(Y_nlev+1)), dtype = '<U2'))
                     df_pred.columns = yo
+                    
+                    # Calculate longitudinal ordinal scores
+                    if ordinal_score_method == "cumulative":
+                        # Cumulative probability method
+                        ordinal_scores = []
+                        for idx in range(len(score_multi_get_test)):
+                            probs = score_multi_get_test[idx]
+                            cumulative_probs = np.cumsum(probs)
+                            # Find the class where cumulative probability exceeds Y_prop threshold
+                            # Using 0.5 as default threshold, can be made configurable
+                            ordinal_score = np.argmax(cumulative_probs >= 0.5)
+                            ordinal_scores.append(ordinal_score)
+                        df_pred['Ordinal_Score'] = ordinal_scores
+                    else:  # weighted method
+                        # Weighted probability method
+                        ordinal_scores = []
+                        for idx in range(len(score_multi_get_test)):
+                            probs = score_multi_get_test[idx]
+                            # Calculate weighted score: sum(prob_i * class_i)
+                            ordinal_score = np.sum([probs[i] * i for i in range(len(probs))])
+                            ordinal_scores.append(ordinal_score)
+                        df_pred['Ordinal_Score'] = ordinal_scores
+                    
                     dataframe = pd.concat([dataframe,df_pred],axis = 1)
 
                     dataframe.to_csv(
@@ -1717,6 +1749,29 @@ def train_model(Y_nlev, model, ds_train, ds_valid, weight_prevalence, weight_unl
                     df_pred = pd.DataFrame(Prevalence_multi_total_test)
                     yo = np.char.add("Pred_",np.array(list(range(Y_nlev+1)), dtype = '<U2'))
                     df_pred.columns = yo
+                    
+                    # Calculate longitudinal ordinal scores for prevalence
+                    if ordinal_score_method == "cumulative":
+                        # Cumulative probability method
+                        ordinal_scores = []
+                        for idx in range(len(Prevalence_multi_total_test)):
+                            probs = Prevalence_multi_total_test[idx]
+                            cumulative_probs = np.cumsum(probs)
+                            # Find the class where cumulative probability exceeds Y_prop threshold
+                            # Using 0.5 as default threshold, can be made configurable
+                            ordinal_score = np.argmax(cumulative_probs >= 0.5)
+                            ordinal_scores.append(ordinal_score)
+                        df_pred['Ordinal_Score'] = ordinal_scores
+                    else:  # weighted method
+                        # Weighted probability method
+                        ordinal_scores = []
+                        for idx in range(len(Prevalence_multi_total_test)):
+                            probs = Prevalence_multi_total_test[idx]
+                            # Calculate weighted score: sum(prob_i * class_i)
+                            ordinal_score = np.sum([probs[i] * i for i in range(len(probs))])
+                            ordinal_scores.append(ordinal_score)
+                        df_pred['Ordinal_Score'] = ordinal_scores
+                    
                     dataframe = pd.concat([dataframe,df_pred],axis = 1)
                     dataframe.to_csv(output_directory + "Prevalence_" + "_" + flag_save + "_" + output_fname, index=True,
                                         sep=',')

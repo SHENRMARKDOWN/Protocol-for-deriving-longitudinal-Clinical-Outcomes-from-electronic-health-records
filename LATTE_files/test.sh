@@ -42,5 +42,6 @@ python3 c_main.py --train_dfname "example_input/train.csv" \
                     --flag_prediction 0 \
                     --flag_relapse 0 \
                     --has_other_fts \
-                    --multi_model "adj_logit" # "base_logit", "cum_logit", "adj_logit"
+                    --multi_model "adj_logit" \
+                    --ordinal_score_method "weighted" # "cumulative", "weighted"
 
